@@ -7,10 +7,15 @@
   --font-display: "Outfit", sans-serif;
   
   --color-cocoa: #3D2314;
+  --color-brand-cocoa: #3D2314;
   --color-cocoa-light: #5A352A;
+  --color-brand-cocoa-light: #5A352A;
   --color-gold: #D4AF37;
+  --color-brand-gold: #D4AF37;
   --color-beige: #F5E6D3;
+  --color-brand-beige: #F5E6D3;
   --color-cream: #FDFBF7;
+  --color-brand-cream: #FDFBF7;
   --color-brand-red: #8B0000;
 }
 

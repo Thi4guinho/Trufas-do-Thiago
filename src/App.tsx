@@ -73,7 +73,10 @@ export default function App() {
     
     if (savedCart) {
       try {
-        setCart(JSON.parse(savedCart));
+        const parsed = JSON.parse(savedCart);
+        if (Array.isArray(parsed)) {
+          setCart(parsed);
+        }
       } catch (e) {
         console.error('Failed to load cart', e);
       }
@@ -81,7 +84,10 @@ export default function App() {
 
     if (savedFavorites) {
       try {
-        setFavorites(JSON.parse(savedFavorites));
+        const parsed = JSON.parse(savedFavorites);
+        if (Array.isArray(parsed)) {
+          setFavorites(parsed);
+        }
       } catch (e) {
         console.error('Failed to load favorites', e);
       }
