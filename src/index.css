@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  
+  --color-cocoa: #3D2314;
+  --color-cocoa-light: #5A352A;
+  --color-gold: #D4AF37;
+  --color-beige: #F5E6D3;
+  --color-cream: #FDFBF7;
+  --color-brand-red: #8B0000;
+}
+
+@layer base {
+  body {
+    @apply bg-cream text-cocoa font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .promo-glow {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+.truffle-card-hover {
+  @apply transition-all duration-300 hover:shadow-md;
+}
