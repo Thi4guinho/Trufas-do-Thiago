@@ -149,39 +149,37 @@ export default function App() {
     };
 
     try {
-      // 1. Enviar para o servidor (Registro/Log)
-      const response = await fetch('/api/order', {
+      // 1. Tentar registrar no servidor (opcional)
+      fetch('/api/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderData)
-      });
+      }).catch(err => console.warn('API Registry failed, proceeding to WhatsApp:', err));
       
-      if (response.ok) {
-        // 2. Formatar e Abrir WhatsApp
-        const itemsText = cart.map(item => `• *${item.quantity}x* ${item.name}`).join('%0A');
-        const waMessage = `*NOVO PEDIDO - TRUFINHAS DO THIAGO*%0A%0A` +
-          `*Cliente:* ${customerName}%0A` +
-          `*Telefone:* ${customerPhone}%0A%0A` +
-          `*Itens:*%0A${itemsText}%0A%0A` +
-          `*Total de Trufas:* ${totalQuantity}%0A` +
-          `*Economia:* R$ ${pricing.savings.toFixed(2)}%0A` +
-          `*TOTAL FINAL: R$ ${pricing.totalPrice.toFixed(2)}*%0A%0A` +
-          `_Poderia confirmar meu pedido?_`;
+      // 2. Formatar e Abrir WhatsApp (Sempre executa)
+      const itemsText = cart.map(item => `• *${item.quantity}x* ${item.name}`).join('%0A');
+      const waMessage = `*NOVO PEDIDO - TRUFINHAS DO THIAGO*%0A%0A` +
+        `*Cliente:* ${customerName}%0A` +
+        `*Telefone:* ${customerPhone}%0A%0A` +
+        `*Itens:*%0A${itemsText}%0A%0A` +
+        `*Total de Trufas:* ${totalQuantity}%0A` +
+        `*Economia:* R$ ${pricing.savings.toFixed(2)}%0A` +
+        `*TOTAL FINAL: R$ ${pricing.totalPrice.toFixed(2)}*%0A%0A` +
+        `_Poderia confirmar meu pedido?_`;
 
-        // Seu número de WhatsApp configurado
-        const myPhoneNumber = '5511934011936'; 
-        const waUrl = `https://wa.me/${myPhoneNumber}?text=${waMessage}`;
-        
-        window.open(waUrl, '_blank');
+      // Seu número de WhatsApp configurado
+      const myPhoneNumber = '5511934011936'; 
+      const waUrl = `https://wa.me/${myPhoneNumber}?text=${waMessage}`;
+      
+      window.open(waUrl, '_blank');
 
-        setOrderSent(true);
-        clearCart();
-        setCustomerName('');
-        setCustomerPhone('');
-      }
+      setOrderSent(true);
+      clearCart();
+      setCustomerName('');
+      setCustomerPhone('');
     } catch (error) {
       console.error('Submit Error:', error);
-      alert('Erro ao enviar pedido. Tente novamente.');
+      alert('Erro inesperado. Mas você pode tentar novamente.');
     } finally {
       setIsSubmitting(false);
     }
